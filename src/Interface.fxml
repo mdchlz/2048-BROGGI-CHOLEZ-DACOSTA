@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="312.0" prefWidth="425.0" style="-fx-background-color: lightgrey;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="FXMLDocumentController">
+   <children>
+      <Label layoutX="48.0" layoutY="26.0" text="2048">
+         <font>
+            <Font name="System Bold" size="64.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="139.0" prefHeight="17.0" prefWidth="174.0" text="Join the numbers and get to the " />
+      <Label layoutX="222.0" layoutY="139.0" text="2048 tiles">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <GridPane alignment="CENTER_RIGHT" gridLinesVisible="true" hgap="1.0" layoutX="48.0" layoutY="185.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="330.0" style="-fx-background-color: grey;" vgap="1.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="185.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </GridPane>
+      <Label alignment="CENTER" layoutX="238.0" layoutY="35.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="SCORE" textAlignment="CENTER" textFill="WHITE" />
+      <Label alignment="CENTER" layoutX="324.0" layoutY="35.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="BEST" textAlignment="CENTER" textFill="WHITE" />
+      <Label alignment="CENTER" layoutX="324.0" layoutY="52.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="25555" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="238.0" layoutY="52.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="25555" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="MOVE" />
+   </cursor>
+</AnchorPane>
