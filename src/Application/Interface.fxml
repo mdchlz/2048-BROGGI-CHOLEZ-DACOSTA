@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="425.0" style="-fx-background-color: lightgrey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.InterfaceController">
+   <children>
+      <Label layoutX="42.0" layoutY="19.0" text="2048">
+         <font>
+            <Font name="System Bold" size="64.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="139.0" prefHeight="17.0" prefWidth="174.0" text="Join the numbers and get to the " />
+      <Label layoutX="222.0" layoutY="139.0" text="2048 tiles">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <GridPane alignment="CENTER_RIGHT" gridLinesVisible="true" hgap="1.0" layoutX="48.0" layoutY="185.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="330.0" style="-fx-background-color: grey;" vgap="1.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="185.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <ImageView fx:id="imge3" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge2" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge1" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../../../Pictures/2048.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge14" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="3">
+               <image>
+                  <Image url="@../../../../../Pictures/2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge13" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge12" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge11" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge10" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge9" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge8" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge15" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imge7" fitHeight="80.0" fitWidth="80.0" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../../../../../Pictures/empty.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Label id="scoretxt" fx:id="Score" alignment="CENTER" layoutX="238.0" layoutY="35.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="SCORE" textAlignment="CENTER" textFill="WHITE" />
+      <Label id="besttxt" fx:id="Best" alignment="CENTER" layoutX="324.0" layoutY="35.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="BEST" textAlignment="CENTER" textFill="WHITE" />
+      <Label id="bestint" fx:id="Bestint" alignment="CENTER" layoutX="324.0" layoutY="52.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label id="scoreint" fx:id="Scoreint" alignment="CENTER" layoutX="238.0" layoutY="52.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="0" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <MenuBar prefHeight="27.0" prefWidth="425.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Jeu">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Nouveau jeu" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Aide">
+            <items>
+              <MenuItem mnemonicParsing="false" text="A propos" />
+                  <MenuItem mnemonicParsing="false" text="Contact" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
