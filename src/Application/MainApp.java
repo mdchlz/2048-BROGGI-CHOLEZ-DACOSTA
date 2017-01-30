@@ -54,7 +54,7 @@ public class MainApp extends Application {
      * Returns the main stage.
      * @return
      */
-    public Stage getPrimaryStage() {
+    public Stage getStage() {
         return Stage;
     }
 

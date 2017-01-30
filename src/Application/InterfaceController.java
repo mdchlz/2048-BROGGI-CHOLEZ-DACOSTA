@@ -7,10 +7,12 @@ package Application;
 
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 
 /**
  *
@@ -19,37 +21,9 @@ import javafx.scene.layout.FlowPane;
 public class InterfaceController {
     
     @FXML
-    private FlowPane a;
+    private GridPane Grid;
     @FXML
-    private FlowPane b;
-    @FXML
-    private FlowPane c;
-    @FXML
-    private FlowPane d;
-    @FXML
-    private FlowPane e;
-    @FXML
-    private FlowPane f;
-    @FXML
-    private FlowPane g;
-    @FXML
-    private FlowPane h;
-    @FXML
-    private FlowPane i;
-    @FXML
-    private FlowPane j;
-    @FXML
-    private FlowPane k;
-    @FXML
-    private FlowPane l;
-    @FXML
-    private FlowPane m;
-    @FXML
-    private FlowPane n;
-    @FXML
-    private FlowPane o;
-    @FXML
-    private FlowPane p;
+    private Label griid;
     @FXML
     private Label Score;
     @FXML
@@ -59,35 +33,9 @@ public class InterfaceController {
     @FXML
     private Label Bestint;
     @FXML
-    private ImageView imgb;
+    private ImageView imge14;
     @FXML
-    private ImageView imgc;
-    @FXML
-    private ImageView imgd;
-    @FXML
-    private ImageView imge;
-    @FXML
-    private ImageView imgf;
-    @FXML
-    private ImageView imgg;
-    @FXML
-    private ImageView imgh;
-    @FXML
-    private ImageView imgi;
-    @FXML
-    private ImageView imgj;
-    @FXML
-    private ImageView imgk;
-    @FXML
-    private ImageView imgl;
-    @FXML
-    private ImageView imgm;
-    @FXML
-    private ImageView imgn;
-    @FXML
-    private ImageView imgo;
-    @FXML
-    private ImageView imgp;
+    private ImageView imge23;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -121,20 +69,23 @@ public class InterfaceController {
     
     public void ajoutTuile() {
         //String tab[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"};
-        /**Random rand = new Random();
-         *for (int x = 0; x <= 1; x++) {
-         *   Random ra = new Random();
-         *   int tuiles = (1 + ra.nextInt(2)) * 2;
-         *   String chemin = "file:/C:/Users/Thomaas/Pictures/empty/"+tuiles+".png";
-         *   //ImageView img = new ImageView();
-         *   //a.getChildren().add(img);
-         *   //Image image = new Image(chemin);
-         *   //img.setId("imga");
-         *   //img.setImage(image);
-         *   System.out.println(chemin);
-         *   System.out.println(tuiles);
-         *}
-         */
+        /*
+        Random rand = new Random();
+        for (int x = 0; x <= 1; x++) {
+            Random ra = new Random();
+            int tuiles = (1 + ra.nextInt(2)) * 2;
+            String chemin = "file:/C:/Users/Thomaas/Pictures/empty/"+tuiles+".png";
+            ImageView img = new ImageView();
+            a.getChildren().add(img);
+            Image image = new Image(chemin);
+            img.setId("imga");
+            img.setImage(image);
+            System.out.println(chemin);
+            System.out.println(tuiles);
+        } */
+        Button button = new Button("CAMARCHE?");
+        GridPane.setConstraints(button,0,0);
+        Bestint.setText(String.valueOf(522));
     }
     
 }
