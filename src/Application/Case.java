@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jeu2048.l2;
+package Application;
+
+import Application.Grille;
+import Application.Parametres;
 
 /**
  *

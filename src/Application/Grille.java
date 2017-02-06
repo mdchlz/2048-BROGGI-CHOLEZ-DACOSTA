@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jeu2048.l2;
+package Application;
 
+import Application.Case;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
