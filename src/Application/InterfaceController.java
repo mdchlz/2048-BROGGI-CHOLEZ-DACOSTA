@@ -86,9 +86,7 @@ public class InterfaceController {
         String chemin = "file:Images/2048.png";
         Image image = new Image(chemin);
         imgview.setImage(image);
-        
-        grid.add(imgview, 2, 2);
-        //file:/C:/Users/Thomaas/Documents/NetBeansProjects/2048-BROGGI-CHOLEZ-DACOSTA/Images/128.png
+        grid.add(imgview, 1, 1);
     }
     
 }
