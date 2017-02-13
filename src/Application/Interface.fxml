@@ -39,13 +39,6 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="file:/C:/Users/Thomaas/Documents/NetBeansProjects/2048-BROGGI-CHOLEZ-DACOSTA/Images/128.png" />
-               </image>
-            </ImageView>
-         </children>
       </GridPane>
       <Label id="scoretxt" fx:id="Score" alignment="CENTER" layoutX="238.0" layoutY="35.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="SCORE" textAlignment="CENTER" textFill="WHITE" />
       <Label id="besttxt" fx:id="Best" alignment="CENTER" layoutX="324.0" layoutY="35.0" prefHeight="17.0" prefWidth="79.0" style="-fx-background-color: grey;" text="BEST" textAlignment="CENTER" textFill="WHITE" />
