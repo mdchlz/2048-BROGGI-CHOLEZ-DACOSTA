@@ -21,9 +21,7 @@ import javafx.scene.layout.GridPane;
 public class InterfaceController {
     
     @FXML
-    private GridPane Grid;
-    @FXML
-    private Label griid;
+    private GridPane grid;
     @FXML
     private Label Score;
     @FXML
@@ -68,7 +66,7 @@ public class InterfaceController {
     }
     
     public void ajoutTuile() {
-        //String tab[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"};
+                //String tab[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"};
         /*
         Random rand = new Random();
         for (int x = 0; x <= 1; x++) {
@@ -83,9 +81,14 @@ public class InterfaceController {
             System.out.println(chemin);
             System.out.println(tuiles);
         } */
-        Button button = new Button("CAMARCHE?");
-        GridPane.setConstraints(button,0,0);
         Bestint.setText(String.valueOf(522));
+        ImageView imgview = new ImageView();
+        String chemin = "file:Images/2048.png";
+        Image image = new Image(chemin);
+        imgview.setImage(image);
+        
+        grid.add(imgview, 2, 2);
+        //file:/C:/Users/Thomaas/Documents/NetBeansProjects/2048-BROGGI-CHOLEZ-DACOSTA/Images/128.png
     }
     
 }
