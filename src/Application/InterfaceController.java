@@ -5,13 +5,10 @@
  */
 package Application;
 
-import java.util.Random;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -30,10 +27,6 @@ public class InterfaceController {
     private Label Best;
     @FXML
     private Label Bestint;
-    @FXML
-    private ImageView imge14;
-    @FXML
-    private ImageView imge23;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -53,7 +46,7 @@ public class InterfaceController {
     @FXML
     private void initialize() {
         // Initialize the person table with the two columns.
-        ajoutTuile();
+        nouvellePartie();
     }
 
     /**
@@ -65,30 +58,22 @@ public class InterfaceController {
         this.mainApp = mainApp;
     }
     
-    public void ajoutTuile() {
-                //String tab[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"};
-        /*
-        Random rand = new Random();
-        for (int x = 0; x <= 1; x++) {
-            Random ra = new Random();
-            int tuiles = (1 + ra.nextInt(2)) * 2;
-            String chemin = "file:/C:/Users/Thomaas/Pictures/empty/"+tuiles+".png";
-            ImageView img = new ImageView();
-            a.getChildren().add(img);
+    public void nouvellePartie() {
+        Grille g = new Grille();
+        boolean b = g.nouvelleCase();
+        b = g.nouvelleCase();
+        for(Case c : g.getGrille()) {
+            int cx = c.getX();
+            int cy = c.getY();
+            int cvalue = c.getValeur();
+            String chemin = "file:Images/"+cvalue+".png";
+            ImageView imgview = new ImageView();
             Image image = new Image(chemin);
-            img.setId("imga");
-            img.setImage(image);
-            System.out.println(chemin);
-            System.out.println(tuiles);
-        } */
-        Bestint.setText(String.valueOf(522));
-        ImageView imgview = new ImageView();
-        String chemin = "file:Images/2048.png";
-        Image image = new Image(chemin);
-        imgview.setImage(image);
-        
-        grid.add(imgview, 2, 2);
-        //file:/C:/Users/Thomaas/Documents/NetBeansProjects/2048-BROGGI-CHOLEZ-DACOSTA/Images/128.png
+            imgview.setImage(image);
+            grid.add(imgview, cx, cy);
+            System.out.println(cx+", "+cy+", "+cvalue);
+        }
+         
     }
     
 }
