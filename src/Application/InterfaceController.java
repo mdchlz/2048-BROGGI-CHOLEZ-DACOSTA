@@ -5,7 +5,6 @@
  */
 package Application;
 
-import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -60,21 +59,6 @@ public class InterfaceController {
     }
     
     public void nouvellePartie() {
-                //String tab[] = {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"};
-        /*
-        Random rand = new Random();
-        for (int x = 0; x <= 1; x++) {
-            Random ra = new Random();
-            int tuiles = (1 + ra.nextInt(2)) * 2;
-            String chemin = "file:/C:/Users/Thomaas/Pictures/empty/"+tuiles+".png";
-            ImageView img = new ImageView();
-            a.getChildren().add(img);
-            Image image = new Image(chemin);
-            img.setId("imga");
-            img.setImage(image);
-            System.out.println(chemin);
-            System.out.println(tuiles);
-        } */
         Grille g = new Grille();
         boolean b = g.nouvelleCase();
         b = g.nouvelleCase();
@@ -89,6 +73,7 @@ public class InterfaceController {
             grid.add(imgview, cx, cy);
             System.out.println(cx+", "+cy+", "+cvalue);
         }
+         
     }
     
 }
