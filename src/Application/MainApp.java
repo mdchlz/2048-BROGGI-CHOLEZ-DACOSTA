@@ -5,61 +5,37 @@
  */
 package Application;
 
-import java.io.IOException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    private Stage Stage;
-    private AnchorPane root;
-
     @Override
-    public void start(Stage Stage) {
-        this.Stage = Stage;
-        this.Stage.setTitle("2048");
-
-        initInterface();
-    }
-
-    /**
-     * Initializes the root layout.
-     */
-    public void initInterface() {
-        try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("Interface.fxml"));
-            root = (AnchorPane) loader.load();
-
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(root);
-            Stage.setScene(scene);
-            Stage.show();
-            
-            // Give the controller access to the main app.
-            InterfaceController controller = loader.getController();
-            controller.setMainApp(this);
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Interface.fxml"));
         
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
-     * Returns the main stage.
-     * @return
+     * @param args the command line arguments
      */
-    public Stage getStage() {
-        return Stage;
-    }
-
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }

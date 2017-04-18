@@ -5,9 +5,6 @@
  */
 package Application;
 
-import Application.Grille;
-import Application.Parametres;
-
 /**
  *
  * @author Sylvain

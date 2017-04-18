@@ -5,18 +5,19 @@
  */
 package Application;
 
-import Application.Case;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
  *
  * @author Sylvain
  */
-public class Grille implements Parametres {
+public class Grille implements Parametres, Serializable {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
@@ -218,4 +219,16 @@ public class Grille implements Parametres {
             return false;
         }
     }
+    
+    // méthode writeObject, utilisée lors de la sérialization
+    private  void writeObject(ObjectOutputStream oos)
+    throws IOException {
+
+        for(Case c : grille) {
+            oos.write(c.getX());
+            oos.write(c.getY());
+            oos.write(c.getValeur());
+        }
+    }
+    
 }
