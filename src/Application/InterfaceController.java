@@ -29,19 +29,36 @@ import javafx.scene.layout.GridPane;
  */
 public class InterfaceController implements Initializable {
 
+    /**
+     * Grille représentant l'application
+     */
     @FXML
     private GridPane grille;
+    /**
+     * Encadré pour afficher le score du joueur
+     */
     @FXML
     private Label score;
     @FXML
     private Label scoreint;
+    /**
+     * Encadré pour afficher le meilleur score du joueur
+     */
     @FXML
     private Label best;
     @FXML
     private Label bestint;
-    // Reference to the main application.
+    /**
+     * Reference to the main application.
+    */
     private MainApp mainApp;
+    /**
+     * Entier pour récupérer la direction souhaitée
+     */
     public int direction;
+    /**
+     * Nouvelle grille pour lancer une nouvelle partie
+     */
     Grille g = new Grille();
     
     @Override
@@ -49,6 +66,11 @@ public class InterfaceController implements Initializable {
         
     }
     
+    /**
+     * Permet d'initialiser une nouvelle partie :
+     *  - création des deux nouvelles cases au début de la partie
+     *  - ajout des images associées aux cases créées
+     */
     public void initPartie () {
         boolean b = g.nouvelleCase();
         b = g.nouvelleCase();   
@@ -56,6 +78,10 @@ public class InterfaceController implements Initializable {
         ajoutImageCase(g);
     }
     
+    /**
+     * Permet d'ajouter toutes les images aux cases qui sont dans l'ensemble de la grille
+     * @param g Grille dans laquelle se trouve les cases du jeu pour lesquelles il faut ajouter les images
+     */
     public void ajoutImageCase(Grille g) {
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
@@ -79,6 +105,13 @@ public class InterfaceController implements Initializable {
         scoreint.setText(String.valueOf(g.getValeurMax()));
     }
     
+    /**
+     * Permet le fonctionnement d'une partie tant qu'elle n'est pas terminée : 
+     *  - si la partie n'est pas finie, déplacement des cases en fonction de la direction choisie
+     *  - génération des nouvelles cases après un déplacement
+     *  - génération du message de victoire ou de défaite 
+     * @param g Grille dans laquelle la partie se déroule
+     */
     public void deroulementPartie(Grille g) {
         boolean b;
         if (!g.partieFinie()) {
@@ -103,6 +136,11 @@ public class InterfaceController implements Initializable {
         }
     }
     
+    /**
+     * Permet définir la direction dans laquelle les cases doivent être déplacées en fonction de la touche préssée
+     * Puis lancement du déroulement de la partie
+     * @param ke Evénement lié au clic de la souris
+     */
     @FXML
     public void keyPressed(KeyEvent ke) {
         if (ke.getCode() == KeyCode.LEFT) {
