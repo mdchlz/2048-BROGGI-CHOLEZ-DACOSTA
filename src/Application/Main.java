@@ -14,6 +14,9 @@ import java.util.Scanner;
 public class Main implements Parametres {
 
     /**
+     * Permet de lancer une nouvelle partie dans la console :
+     *  - génération de la nouvelle grille et des cases nécessaires
+     *  - tant que la partie n'est pas finie : choix de déplacement et déplacement de la case 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
