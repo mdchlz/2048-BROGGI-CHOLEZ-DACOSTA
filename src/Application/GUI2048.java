@@ -11,10 +11,15 @@ package Application;
  */
 public class GUI2048 extends javax.swing.JFrame implements Parametres {
 
+    /**
+     * g : Grille pour lancer une nouvelle interface de l'application
+     */
     private Grille g;
 
     /**
      * Creates new form GUI2048
+     * Constructeur de l'interface qui permet d'initialiser les composants
+     * La grille, les nouvelles cases et qui rafraichit la grille
      */
     public GUI2048() {
         initComponents();
@@ -24,10 +29,17 @@ public class GUI2048 extends javax.swing.JFrame implements Parametres {
         this.rafraichir();
     }
 
+    /**
+     * Permet de mettre à jour la grille : afficher les nouvelles cases de la grille
+     */
     private void rafraichir() {
         labelGrille.setText(g.toHTML());
     }
 
+    /**
+     * Permet de bloquer l'utilisation des boutons directionnels en fin de partie
+     * @param message Chaine de caractères qui affiche un message à la fin de la partie : message de victoire ou de défaite
+     */
     private void finPartie(String message) {
         resultat.setText(message);
         boutonDroite.setEnabled(false);
@@ -134,6 +146,14 @@ public class GUI2048 extends javax.swing.JFrame implements Parametres {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Permet l'utilisation du bouton directionnel haut si le bouton n'est pas désactivé :
+     *  - déplace les cases qui doivent l'être
+     *  - génère une nouvelle case si possible, sinon annonce la défaite
+     *  - met à jour la grille
+     *  - vérifie si la partie est gagnée ou non, et affiche le score
+     * @param evt Evénement lié au clic de la souris sur le bouton associé
+     */
     private void boutonHautMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonHautMouseClicked
         // TODO add your handling code here:
         if (boutonHaut.isEnabled()) {
@@ -152,6 +172,14 @@ public class GUI2048 extends javax.swing.JFrame implements Parametres {
         }
     }//GEN-LAST:event_boutonHautMouseClicked
 
+    /**
+     * Permet l'utilisation du bouton directionnel gauche si le bouton n'est pas désactivé :
+     *  - déplace les cases qui doivent l'être
+     *  - génère une nouvelle case si possible, sinon annonce la défaite
+     *  - met à jour la grille
+     *  - vérifie si la partie est gagnée ou non, et affiche le score
+     * @param evt Evénement lié au clic de la souris sur le bouton associé
+     */
     private void boutonGaucheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonGaucheMouseClicked
         // TODO add your handling code here:
         if (boutonGauche.isEnabled()) {
@@ -170,6 +198,14 @@ public class GUI2048 extends javax.swing.JFrame implements Parametres {
         }
     }//GEN-LAST:event_boutonGaucheMouseClicked
 
+    /**
+     * Permet l'utilisation du bouton directionnel drroite si le bouton n'est pas désactivé :
+     *  - déplace les cases qui doivent l'être
+     *  - génère une nouvelle case si possible, sinon annonce la défaite
+     *  - met à jour la grille
+     *  - vérifie si la partie est gagnée ou non, et affiche le score
+     * @param evt Evénement lié au clic de la souris sur le bouton associé
+     */
     private void boutonDroiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonDroiteMouseClicked
         // TODO add your handling code here:
         if (boutonDroite.isEnabled()) {
@@ -187,7 +223,15 @@ public class GUI2048 extends javax.swing.JFrame implements Parametres {
             if (g.partieFinie()) this.finPartie("Perdu ! Score = "+g.getValeurMax());
         }
     }//GEN-LAST:event_boutonDroiteMouseClicked
-
+    
+    /**
+     * Permet l'utilisation du bouton directionnel bas si le bouton n'est pas désactivé :
+     *  - déplace les cases qui doivent l'être
+     *  - génère une nouvelle case si possible, sinon annonce la défaite
+     *  - met à jour la grille
+     *  - vérifie si la partie est gagnée ou non, et affiche le score
+     * @param evt Evénement lié au clic de la souris sur le bouton associé
+     */
     private void boutonBasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_boutonBasMouseClicked
         // TODO add your handling code here:
         if (boutonBas.isEnabled()) {
