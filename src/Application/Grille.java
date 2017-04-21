@@ -5,8 +5,7 @@
  */
 package Application;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -286,19 +285,10 @@ public class Grille implements Parametres, Serializable {
         }
     }
     
-    /**
-     * Méthode writeObject, utilisée lors de la sérialisation
-     * @param oos
-     * @throws IOException 
-     */
-    private  void writeObject(ObjectOutputStream oos)
-    throws IOException {
-
-        for(Case c : grille) {
-            oos.write(c.getX());
-            oos.write(c.getY());
-            oos.write(c.getValeur());
-        }
+    public void ajoutCase(int x, int y, int valeur) {
+        Case c = new Case(x,y,valeur);
+        c.setGrille(this);
+        this.grille.add(c);
     }
     
 }

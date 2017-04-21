@@ -10,17 +10,25 @@ import static Application.Parametres.DROITE;
 import static Application.Parametres.GAUCHE;
 import static Application.Parametres.HAUT;
 import static Application.Parametres.OBJECTIF;
-import java.io.File;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -28,6 +36,9 @@ import javafx.scene.layout.GridPane;
  * @author Thomas
  */
 public class InterfaceController implements Initializable {
+    
+    Statement stmt;
+    Connexion maConnexion = new Connexion();
 
     /**
      * Grille représentant l'application
@@ -56,6 +67,13 @@ public class InterfaceController implements Initializable {
      * Entier pour récupérer la direction souhaitée
      */
     public int direction;
+    public Label etatfinal;
+    public Label labelnomuser;
+    public Button sendscore;
+    public Button bcloseclassement;
+    public TextField inputnomuser;
+    public TableView<Score> tclassement;
+    final ObservableList<Score> data = FXCollections.observableArrayList();
     /**
      * Nouvelle grille pour lancer une nouvelle partie
      */
@@ -63,7 +81,6 @@ public class InterfaceController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
     }
     
     /**
@@ -72,10 +89,24 @@ public class InterfaceController implements Initializable {
      *  - ajout des images associées aux cases créées
      */
     public void initPartie () {
-        boolean b = g.nouvelleCase();
-        b = g.nouvelleCase();   
-        System.out.println(g);
-        ajoutImageCase(g);
+        String request = "SELECT * FROM grille";
+        try {
+            stmt = maConnexion.ObtenirConnexion().createStatement();
+            ResultSet resultat = stmt.executeQuery(request);
+            boolean ok = false;
+            while (resultat.next()) {
+                g.ajoutCase(resultat.getInt("Colonne"),resultat.getInt("Ligne"),resultat.getInt("Valeur"));
+                ok = true;
+            }
+            if (!ok) {
+                boolean b = g.nouvelleCase();
+                b = g.nouvelleCase();   
+            }
+            System.out.println(g);
+            ajoutImageCase(g);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
     
     /**
@@ -119,20 +150,17 @@ public class InterfaceController implements Initializable {
             if (b2) {
                 b = g.nouvelleCase();
                 if (!b) {
-                    g.gameOver();
-                    System.out.println("DEFAITE");
+                    gameOver();
                 }
             }
             ajoutImageCase(g);
             if (g.getValeurMax()>=OBJECTIF) {
                 //Enlever g.victory() mais ajouter élement victoire visuelle
-                g.victory();
-                System.out.println("VICTOIRE");
+                victory();
             }
         } else {
             //Enlever g.gameOver() mais ajouter élement victoire visuelle
-            g.gameOver();
-            System.out.println("PARTIE TERMINEE");
+            gameOver();
         }
     }
     
@@ -155,8 +183,104 @@ public class InterfaceController implements Initializable {
         deroulementPartie(g);
     }
     
-    @FXML
-    private void handleButtonAction(MouseEvent event) {
+    public void sauvegardeGrille() {
+        razdatabase();
+        for(Case c : g.getGrille()) {
+            int cx = c.getX();
+            int cy = c.getY();
+            int cvalue = c.getValeur();
+            String request = "INSERT INTO grille (colonne, ligne, valeur) VALUES ("+cx+","+cy+","+cvalue+")";
+            try {
+                stmt = maConnexion.ObtenirConnexion().createStatement();
+                stmt.executeUpdate(request);
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        }
+        System.exit(0);
     }
+    
+    public void razdatabase () {
+        String request = "TRUNCATE TABLE `grille`";
+        try {
+            stmt = maConnexion.ObtenirConnexion().createStatement();
+            stmt.executeUpdate(request);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void sauvegardeScore() {
+        String nom = inputnomuser.getText();
+        int valeur = g.getValeurMax();
+        System.out.println(nom);
+        System.out.println(valeur);
+        String request = "INSERT INTO score (pseudo, valeur) VALUES ('"+nom+"',"+valeur+")";
+        try {
+            stmt = maConnexion.ObtenirConnexion().createStatement();
+            stmt.executeUpdate(request);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        System.exit(0);
+    }
+    
+    /**
+     * Méthode permettant d'afficher un message en cas de victoire et de fermer l'application ensuite
+     */
+    public void victory() {
+        razdatabase();
+        grille.setOpacity(0.1);
+        etatfinal.setText("VICTOIRE");
+        labelnomuser.setVisible(true);
+        inputnomuser.setVisible(true);
+        sendscore.setVisible(true);
+    }
+
+    /**
+     * Méthode permettant d'afficher un message en cas de défaite et de fermer l'aplication ensuite 
+     */
+    public void gameOver() {
+        razdatabase();
+        grille.setOpacity(0.1);
+        etatfinal.setText("DEFAITE");
+        labelnomuser.setVisible(true);
+        inputnomuser.setVisible(true);
+        sendscore.setVisible(true);
+    }
+    
+    public void classement() {
+        tclassement.setVisible(true);
+        bcloseclassement.setVisible(true);
+        tclassement.setEditable(true);
+        TableColumn Pseudo = new TableColumn("Pseudonyme");
+        Pseudo.setMinWidth(214);
+        Pseudo.setCellValueFactory(
+                new PropertyValueFactory<Score, String>("pseudo")
+        );
+        TableColumn Score = new TableColumn("Score");
+        Score.setMinWidth(115);
+        Score.setCellValueFactory(
+                new PropertyValueFactory<Score, Integer>("valeur")
+        );
+        String request = "SELECT * FROM score ORDER BY valeur DESC";
+        try {
+            stmt = maConnexion.ObtenirConnexion().createStatement();
+            ResultSet resultat = stmt.executeQuery(request);
+            while (resultat.next()) {
+                data.add(new Score(resultat.getString("pseudo"),resultat.getInt("valeur")));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        tclassement.setItems(data);
+        tclassement.getColumns().addAll(Pseudo, Score);
+    }
+    
+    public void closeclassement() {
+        tclassement.setVisible(false);
+        bcloseclassement.setVisible(false);
+    }
+    
 }
     
