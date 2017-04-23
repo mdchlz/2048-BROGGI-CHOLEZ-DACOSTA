@@ -9,7 +9,7 @@ package Application;
  * Classe permettant de générer une nouvelle case et de gérer ses paramètres
  * @author Sylvain
  */
-public class Case implements Parametres {
+public class Case implements Parametres, Cloneable {
     /**
      * x, y : Coordonnées de la case dans la grille de jeu
      * valeur : Chiffre/nombre contenu dans la case
@@ -175,4 +175,15 @@ public class Case implements Parametres {
         return "Case(" + this.x + "," + this.y + "," + this.valeur + ")";
     }
 
+    @Override
+    public Object clone() { 
+	Object copy = null;
+	try {
+            copy = super.clone();
+            } catch(CloneNotSupportedException ex) {
+                System.out.println(ex);
+	}
+	return copy;
+    }
+    
 }

@@ -25,7 +25,6 @@ public class Connexion {
         //chargement de notre pilote
         try {
             Class.forName(urlPilote);
-            System.out.println("Chargement pilote réussi");
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
@@ -33,7 +32,6 @@ public class Connexion {
         //chargement de notre bdd
         try {
             con = DriverManager.getConnection(urlBaseDonnees,"root","");
-            System.out.println("Connexion à la BDD réussie");
         } catch (SQLException ex) {
             System.out.println(ex);
         }

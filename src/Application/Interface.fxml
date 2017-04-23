@@ -64,9 +64,9 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button fx:id="start" layoutX="98.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#initPartie" text="Start" />
-            <Button fx:id="end" layoutX="139.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#sauvegardeGrille" text="End" />
-            <Label fx:id="etatfinal" alignment="CENTER" layoutX="1.0" layoutY="242.0" prefHeight="17.0" prefWidth="425.0" textAlignment="CENTER">
+            <Button fx:id="start" layoutX="72.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#initPartie" text="Début" />
+            <Button fx:id="end" layoutX="121.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#sauvegardeGrille" text="Sauvegarder" />
+            <Label fx:id="etatfinal" alignment="CENTER" layoutX="1.0" layoutY="242.0" prefHeight="17.0" prefWidth="425.0" textAlignment="CENTER" visible="false">
                <font>
                   <Font size="50.0" />
                </font>
@@ -87,6 +87,8 @@
             <Button fx:id="bclassement" layoutX="294.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#classement" text="Classement" />
             <TableView fx:id="tclassement" layoutX="50.0" layoutY="200.0" prefHeight="330.0" prefWidth="330.0" visible="false" />
             <Button fx:id="bcloseclassement" layoutX="186.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#closeclassement" text="Retour" visible="false" />
+            <Button fx:id="baide" layoutX="293.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#aideDeplacement" text="Aide" />
+            <Button fx:id="jeuIA" layoutX="343.0" layoutY="149.0" mnemonicParsing="false" onMouseClicked="#jeuxIA" text="IA" />
          </children>
       </Pane>
    </children>

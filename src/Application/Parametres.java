@@ -8,7 +8,7 @@ package Application;
 /**
  * Classe permettant de regrouper toutes les variables nécessaires pour le fonctionnement du jeu
  * Ces variables pourront être appelées dans les autres classes pour faciliter l'écriture de certaines méthodes
- * @author Sylvain
+ * @author Thomas
  */
 public interface Parametres {
     /**

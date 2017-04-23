@@ -6,17 +6,17 @@
 package Application;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 
 /**
  * Classe permettant de générer une nouvelle grille et de gérer ses paramètres
- * @author Sylvain
+ * @author Thomas
  */
-public class Grille implements Parametres, Serializable {
+public class Grille implements Parametres, Cloneable {
     /**
      * grille : Ensemble de cases regroupant les cases présentent dans la grille de jeu
      */
@@ -24,7 +24,7 @@ public class Grille implements Parametres, Serializable {
     /**
      * valeurMax : Entier représentant la valeur maximale contenue dans la grille de jeu actuel
      */
-    private int valeurMax = 0;
+    private int valeurMax;
     /**
      * deplacement : Booléen vrai si au moins une case a été déplacée suite à un déplacement, faux sinon
      */
@@ -289,6 +289,21 @@ public class Grille implements Parametres, Serializable {
         Case c = new Case(x,y,valeur);
         c.setGrille(this);
         this.grille.add(c);
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public Object clone() {	
+        Grille copy = new Grille();
+	for (Case base : this.grille){
+            Case temp = (Case) base.clone();
+            temp.setGrille(copy);
+            copy.grille.add(temp);
+	}
+	return copy;
     }
     
 }

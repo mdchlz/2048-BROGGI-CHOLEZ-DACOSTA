@@ -19,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -77,7 +78,7 @@ public class InterfaceController implements Initializable {
     /**
      * Nouvelle grille pour lancer une nouvelle partie
      */
-    Grille g = new Grille();
+    Grille g;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -89,6 +90,17 @@ public class InterfaceController implements Initializable {
      *  - ajout des images associées aux cases créées
      */
     public void initPartie () {
+        
+        grille.setOpacity(1);
+        etatfinal.setVisible(false);
+        labelnomuser.setVisible(false);
+        inputnomuser.setVisible(false);
+        sendscore.setVisible(false);
+        tclassement.setVisible(false);
+        bcloseclassement.setVisible(false);
+        
+        g = new Grille();
+        
         String request = "SELECT * FROM grille";
         try {
             stmt = maConnexion.ObtenirConnexion().createStatement();
@@ -102,7 +114,6 @@ public class InterfaceController implements Initializable {
                 boolean b = g.nouvelleCase();
                 b = g.nouvelleCase();   
             }
-            System.out.println(g);
             ajoutImageCase(g);
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -141,7 +152,6 @@ public class InterfaceController implements Initializable {
      *  - si la partie n'est pas finie, déplacement des cases en fonction de la direction choisie
      *  - génération des nouvelles cases après un déplacement
      *  - génération du message de victoire ou de défaite 
-     * @param g Grille dans laquelle la partie se déroule
      */
     public void deroulementPartie(Grille g) {
         boolean b;
@@ -155,11 +165,9 @@ public class InterfaceController implements Initializable {
             }
             ajoutImageCase(g);
             if (g.getValeurMax()>=OBJECTIF) {
-                //Enlever g.victory() mais ajouter élement victoire visuelle
                 victory();
             }
         } else {
-            //Enlever g.gameOver() mais ajouter élement victoire visuelle
             gameOver();
         }
     }
@@ -231,6 +239,7 @@ public class InterfaceController implements Initializable {
     public void victory() {
         razdatabase();
         grille.setOpacity(0.1);
+        etatfinal.setVisible(true);
         etatfinal.setText("VICTOIRE");
         labelnomuser.setVisible(true);
         inputnomuser.setVisible(true);
@@ -243,6 +252,7 @@ public class InterfaceController implements Initializable {
     public void gameOver() {
         razdatabase();
         grille.setOpacity(0.1);
+        etatfinal.setVisible(true);
         etatfinal.setText("DEFAITE");
         labelnomuser.setVisible(true);
         inputnomuser.setVisible(true);
@@ -280,6 +290,132 @@ public class InterfaceController implements Initializable {
     public void closeclassement() {
         tclassement.setVisible(false);
         bcloseclassement.setVisible(false);
+    }
+    
+    public void aideDeplacement() {
+        Boolean b;
+        Boolean b2;
+        
+        direction = testAide();
+        b2 = g.lanceurDeplacerCases(direction);
+        b = g.nouvelleCase();
+        if (!b) {
+            gameOver();
+        }
+        ajoutImageCase(g);
+        if (g.getValeurMax()>=OBJECTIF) {
+            victory();
+        }
+    }
+    
+    public void deplacementCompletIA() {
+        Boolean b;
+        Boolean b2;
+        
+        direction = testIA();
+        b2 = g.lanceurDeplacerCases(direction);
+        b = g.nouvelleCase();
+        if (!b) {
+            gameOver();
+        }
+        ajoutImageCase(g);
+        if (g.getValeurMax()>=OBJECTIF) {
+            victory();
+        }
+    }
+    
+    public void jeuxIA() {
+        while (!g.partieFinie()) {
+            deplacementCompletIA();
+        }
+        if (g.getValeurMax()>=OBJECTIF) {
+            victory();
+        } else {
+            gameOver();
+        }
+    }
+    
+    public int testAide() {
+        int nbreCases[] = new int[4];
+        int indexmincases;
+        //on test un déplacement vers la gauche ou vers le haut
+        //puis à la suite de ce déplacement on test à nouveau gauche ou droite
+        //cela nous permet de tester à une profondeur de 2
+        //et ainsi permet d'effectuer des mouvements moins important dans l'immédiat
+        //mais un plus grand impact par la suite
+        
+        //1er test --> gauche & gauche
+        Grille copy = (Grille) g.clone();
+        copy.lanceurDeplacerCases(GAUCHE);
+        copy.lanceurDeplacerCases(GAUCHE);
+        nbreCases[0] = copy.getGrille().size();
+        
+        //2ième test --> gauche & haut
+        copy = (Grille) g.clone();
+        copy.lanceurDeplacerCases(GAUCHE);
+        copy.lanceurDeplacerCases(HAUT);
+        nbreCases[1] = copy.getGrille().size();
+        
+        //3ième test --> haut & gauche
+        copy = (Grille) g.clone();
+        copy.lanceurDeplacerCases(HAUT);
+        copy.lanceurDeplacerCases(GAUCHE);
+        nbreCases[2] = copy.getGrille().size();
+        
+        //4ième test --> haut & haut
+        copy = (Grille) g.clone();
+        copy.lanceurDeplacerCases(HAUT);
+        copy.lanceurDeplacerCases(HAUT);
+        nbreCases[3] = copy.getGrille().size();
+        
+        indexmincases = minimumCases(nbreCases);
+        if ((indexmincases == 0) || (indexmincases == 1)) {
+            direction = GAUCHE;
+        } else {
+            direction = HAUT;
+        }
+        
+        return direction;
+    }
+    
+    public int testIA() {
+        int nbreCases[] = new int[2];
+        int indexmincases;
+        //on effectue les mêmes tests
+        //cependant pour un soucis de mémoire étant donné que le test s'effectue sur toute la partie
+        //on ne peut tester sur une profondeur de 2
+        
+        //1er test --> gauche
+        Grille copy = (Grille) g.clone();
+        copy.lanceurDeplacerCases(GAUCHE);
+        nbreCases[0] = copy.getGrille().size();
+
+        //3ième test --> haut
+        copy = (Grille) g.clone();
+        copy.lanceurDeplacerCases(HAUT);
+        nbreCases[1] = copy.getGrille().size();
+        
+        indexmincases = minimumCases(nbreCases);
+        if (indexmincases == 0) {
+            direction = GAUCHE;
+        } else {
+            direction = HAUT;
+        }
+        
+        return direction;
+    }
+             
+    public int minimumCases(int [] tab) {
+        int min = 16;
+        int i;
+        int index = 0;
+        for (i = 0; i < tab.length; i++)	{
+            if (tab[i] < min)	{
+                min = tab[i];
+                index = i;
+            }
+        }	
+        return index;
     }
     
 }
