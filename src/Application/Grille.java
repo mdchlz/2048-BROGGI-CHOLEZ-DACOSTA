@@ -287,9 +287,10 @@ public class Grille implements Parametres, Cloneable {
     
     /**
      * Méthode qui permet d'ajouter une case dans une grille
-     * @param x
-     * @param y
-     * @param valeur 
+     * Cette méthode sera utilisée au moment où nous voudrons faire une copie de la grille dans laquelle nous jouons pour faire appel à l'intelligence artificielle
+     * @param x Entier représentant la coordonnée en abscisse de la case à ajouter
+     * @param y Entier représentant la coordonnée en ordonné de la case à ajouter
+     * @param valeur Entrier représentant la valeur contenue dans la case à ajouter
      */
     public void ajoutCase(int x, int y, int valeur) {
         Case c = new Case(x,y,valeur);
@@ -298,8 +299,8 @@ public class Grille implements Parametres, Cloneable {
     }
     
     /**
-     *
-     * @return
+     * Méthode permettant de copier une grille, afin d'avoir une grille de test pour effectuer les tests pour l'intelligence artificielle
+     * @return Renvoie l'objet qui aura été copié
      */
     @Override
     public Object clone() {	

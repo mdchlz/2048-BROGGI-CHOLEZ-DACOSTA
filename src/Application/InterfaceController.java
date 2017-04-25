@@ -46,17 +46,23 @@ public class InterfaceController implements Initializable {
     @FXML
     private GridPane grille;
     /**
-     * Encadré pour afficher le score du joueur
+     * Affichage du mot "score" dans l'interface
      */
     @FXML
     private Label score;
+    /**
+     * Affichage du score du joueur
+     */
     @FXML
     private Label scoreint;
     /**
-     * Encadré pour afficher le meilleur score du joueur
+     * Affichage du mot "best" dans l'interface
      */
     @FXML
     private Label best;
+    /**
+     * Affichage du meilleur score
+     */
     @FXML
     private Label bestint;
     /**
@@ -67,12 +73,19 @@ public class InterfaceController implements Initializable {
      * Entier pour récupérer la direction souhaitée
      */
     public int direction;
+    /**
+     * Utilisé dans la mise en place l'intelligence artificielle
+     */
     public Label etatfinal;
     public Label labelnomuser;
     public Button sendscore;
     public Button bcloseclassement;
     public TextField inputnomuser;
+    /** 
+     * Affichage de la table contenant le classement des joueurs de l'application
+     */
     public TableView<Score> tclassement;
+    
     final ObservableList<Score> data = FXCollections.observableArrayList();
     /**
      * Nouvelle grille pour lancer une nouvelle partie
@@ -190,6 +203,11 @@ public class InterfaceController implements Initializable {
         deroulementPartie(g);
     }
     
+    /**
+     * Méthode permettant de sauvegarder la grille représentant la partie en cours
+     * Pour toutes les cases présentes dans la grille : leurs coordonnées et leur valeur sont stockées puis envoyées dans la base de données
+     * Cela n'est possible que si la connexion avec la base de données peut être établie
+     */
     public void sauvegardeGrille() {
         razdatabase();
         for(Case c : g.getGrille()) {
@@ -207,6 +225,9 @@ public class InterfaceController implements Initializable {
         System.exit(0);
     }
     
+    /**
+     * Méthode permettant de remettre à zéro la base de données (il faut être connecté)
+     */
     public void razdatabase () {
         String request = "TRUNCATE TABLE `grille`";
         try {
@@ -217,6 +238,11 @@ public class InterfaceController implements Initializable {
         }
     }
     
+    /**
+     * Méthode permmettant de sauvegarder le score du joueur une fois qu'il a terminé sa partie
+     * Le joueur doit entrer son nom et ensuite on récupère le score qu'il a fait
+     * Et on envoie les données à la base de données (il faut y être connecté)
+     */
     public void sauvegardeScore() {
         String nom = inputnomuser.getText();
         int valeur = g.getValeurMax();
@@ -258,6 +284,10 @@ public class InterfaceController implements Initializable {
         sendscore.setVisible(true);
     }
     
+    /**
+     * Méthode qui permet d'afficher le classement des joueurs de l'application
+     * Récupère les données (nom, score) et les ajoute à la base de données dans la table score
+     */    
     public void classement() {
         tclassement.setVisible(true);
         bcloseclassement.setVisible(true);
@@ -286,11 +316,18 @@ public class InterfaceController implements Initializable {
         tclassement.getColumns().addAll(Pseudo, Score);
     }
     
+    /**
+     * Permet de fermer le classement lorsque l'on clique sur le bouton retour qui se trouve en dessous du classement dans l'interface graphique
+     */
     public void closeclassement() {
         tclassement.setVisible(false);
         bcloseclassement.setVisible(false);
     }
     
+    /**
+     * Méthode permettant d'effectuer le déplacement en fonction du déplacement conseillé par la méthode testAide()
+     * Suite au déplacement, une nouvelle case est générée comme pour un déplacement choisi par l'utilisateur
+     */
     public void aideDeplacement() {
         Boolean b;
         Boolean b2;
@@ -307,12 +344,14 @@ public class InterfaceController implements Initializable {
         }
     }
     
+    /**
+     * Méthode permettant l'appel à la méthode testIA() pour ensuite pouvoir faire une partie complète grâce à l'IA dans la méthode jeuxIA()
+     */
     public void deplacementCompletIA() {
         Boolean b;
-        Boolean b2;
         
         direction = testIA();
-        b2 = g.lanceurDeplacerCases(direction);
+        g.lanceurDeplacerCases(direction);
         b = g.nouvelleCase();
         if (!b) {
             gameOver();
@@ -323,6 +362,10 @@ public class InterfaceController implements Initializable {
         }
     }
     
+    /**
+     * Méthode utilisant la méthode deplacementCompletIA() pour le déroulement d'une partie normale
+     * C'est à dire tant que la partie n'est pas finie, l'IA effectue des coups
+     */
     public void jeuxIA() {
         while (!g.partieFinie()) {
             deplacementCompletIA();
@@ -334,14 +377,16 @@ public class InterfaceController implements Initializable {
         }
     }
     
+    /**
+     * Méthode permettant de définir le coup le plus approprié pour l'IA
+     * L'heuristique est faite de façon à ce que les déplacements soient créés pour une profondeur de 2
+     * Les déplacements privilégiés sont ceux vers le haut et ceux vers la gauche
+     * Enfin, la méthode retient le coup qui a permis d'obtenir le moins de cases possibles
+     * @return Entier correspondant à la direction choisie par l'IA : HAUT=1, DROITE=2, BAS=-1, GAUCHE=-2
+     */
     public int testAide() {
         int nbreCases[] = new int[4];
         int indexmincases;
-        //on test un déplacement vers la gauche ou vers le haut
-        //puis à la suite de ce déplacement on test à nouveau gauche ou droite
-        //cela nous permet de tester à une profondeur de 2
-        //et ainsi permet d'effectuer des mouvements moins important dans l'immédiat
-        //mais un plus grand impact par la suite
         
         //1er test --> gauche & gauche
         Grille copy = (Grille) g.clone();
@@ -389,7 +434,7 @@ public class InterfaceController implements Initializable {
         copy.lanceurDeplacerCases(GAUCHE);
         nbreCases[0] = copy.getGrille().size();
 
-        //3ième test --> haut
+        //2ième test --> haut
         copy = (Grille) g.clone();
         copy.lanceurDeplacerCases(HAUT);
         nbreCases[1] = copy.getGrille().size();
@@ -403,7 +448,7 @@ public class InterfaceController implements Initializable {
         
         return direction;
     }
-             
+    
     public int minimumCases(int [] tab) {
         int min = 16;
         int i;
