@@ -285,6 +285,12 @@ public class Grille implements Parametres, Cloneable {
         }
     }
     
+    /**
+     * Méthode qui permet d'ajouter une case dans une grille
+     * @param x
+     * @param y
+     * @param valeur 
+     */
     public void ajoutCase(int x, int y, int valeur) {
         Case c = new Case(x,y,valeur);
         c.setGrille(this);

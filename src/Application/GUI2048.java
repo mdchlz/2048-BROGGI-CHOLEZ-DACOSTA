@@ -30,7 +30,7 @@ public class GUI2048 extends javax.swing.JFrame implements Parametres {
     }
 
     /**
-     * Permet de mettre à jour la grille : afficher les nouvelles cases de la grille
+     * Permet de mettre à jour la grille : afficher les nouvelles cases de la grille suite à un déplacement
      */
     private void rafraichir() {
         labelGrille.setText(g.toHTML());
