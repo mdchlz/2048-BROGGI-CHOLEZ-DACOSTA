@@ -175,6 +175,11 @@ public class Case implements Parametres, Cloneable {
         return "Case(" + this.x + "," + this.y + "," + this.valeur + ")";
     }
 
+    /**
+     * Réécriture de la méthode permettant de cloner un objet, le but est de pouvoir créer une copie de la case pour l'utiliser
+     * dans l'intelligence artificielle
+     * @return Renvoie l'objet de l'on vient de cloner pour pouvoir gérer sa copie
+     */
     @Override
     public Object clone() { 
 	Object copy = null;
